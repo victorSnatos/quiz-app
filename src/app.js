@@ -1,44 +1,69 @@
 
-import { question } from "./model/Question.js";
-import { Quiz } from "./model/Quiz.js";
-import { UI } from "./model/UI.js";
-import { User } from "./model/User.js";
-
-
-
-/**
- * 
- * @param {Quiz} quiz 
- * @param {UI} ui 
- */
-function renderQuestion(quiz, ui){
-    if(quiz.isEnded()){
-        ui.playEnd(quiz.score, quiz.jugador)
-    }else{   
-        ui.playGame()
-        .showinfo(quiz.jugador)
-        .showQuestion(quiz.getQuestionIndex().question)
-        .showChoices(quiz.getQuestionIndex().choices, (choices)=>{
-            quiz.guess(choices)
-            renderQuestion(quiz, ui)
-        })
-        .showProgress(quiz.indexCurrentQuestion + 1, quiz.question.length)
+(
+    /**
+     * 
+     * @param {Window} global 
+     * @param {function} callback 
+     */
+    function(global, callback){
+    if(!global.$main){
+        global.$main = callback()
+        global.addEventListener('hashchange', $main.load)
+        global.addEventListener('load', $main.load)
     }
-}
 
+})(window, function(){
+    const Routes = {}
+    const container = document.querySelector('#main')
 
-function main(jugador){
-    const newJugador = new User(jugador)
-    const quiz = new Quiz(question, newJugador.name)
-    const ui = new UI
-    renderQuestion(quiz, ui)
-}
+    const main = {}
+    /**
+     * 
+     * @param {string} route 
+     * @param {string} url 
+     * @param {function} callback 
+     * @returns {object}
+     */
+    main.routes = function(route, url , callback){
+        Routes[route] = {url, callback}
+        return this
+    }
+    
+    
+    main.load = function(){
+        const hash = location.hash.substring(1) || '/'
+        const xhr = new XMLHttpRequest();
+        const route = Routes[hash]
+        if(route){
+            xhr.addEventListener('load', function(){
+                container.innerHTML = this.responseText
+                route.callback === null ? null : route.callback()
+            })
+            xhr.open('GET', route.url, true)
+            xhr.send(null)
 
-
-const play = document.querySelector('#play')
-play.addEventListener('click', () => {
-    const jugador = document.querySelector('#jugador')
-    if(jugador.value === "") return console.log('deves ingresar un nobre para empezar')
-    main(jugador.value)
+        }
+    }
+    return main
 })
+
+
+$main.routes('/','./views/home.html',null)
+     .routes('/game','./views/game.html', null)
+    .load()
+
+
+function Main (){
+    const play = document.querySelector('#play')
+    play.addEventListener('submit', e =>{
+        e.preventDefault();
+        location.hash = '/game'
+    })
+}
+
+
+
+
+
+
 
