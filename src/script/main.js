@@ -1,3 +1,7 @@
+import { Question } from "./model/Questions.js";
+import { questionsData } from "./data/data.js";
+import { Quiz } from "./model/Quiz.js";
+
 export function Home() {
     const d = document
     const next = d.querySelector('#next')
@@ -25,12 +29,15 @@ export function Home() {
             console.log('Deves llenar todos los requerimientos para enpezar')
             return;
         }
+        const questions = questionsData.map(question => new Question(question.question, question.choices, question.answer, question.categoty))
+        const quiz = new Quiz(questions)
         
         $main.setStorage('gameinfo', {
             player: playerName.value,
-            card: cardSelect.textContent
+            choicesQuestion: cardSelect.textContent.toLowerCase(),
+            totalQuestion: quiz.lengthQuestions(cardSelect.textContent.toLowerCase())
+            
         }) 
-        
         location.hash = '/select-choices'
         
     })
@@ -46,6 +53,40 @@ export function SeletcChoices(){
     const btnMore = d.querySelector('#btn-more')
     const btnLess = d.querySelector('#btn-less')
     const totalQuestion = d.querySelector('#total-question')
+    const infoQuestion = d.querySelector('#question-info')
+    
+    
+    const data = $main.getStorage('gameinfo')
+    infoQuestion.textContent = `${data.choicesQuestion} has ${data.totalQuestion} questions available`
+    
+    
+    
+    let numero = null
+    numero = parseInt(totalQuestion.value, 10)
+    
+    btnLess.addEventListener('click', e =>{
+        e.preventDefault()
+        
+        if (totalQuestion.value === '0'){
+            totalQuestion.value = '0'
+            numero = parseInt(totalQuestion.value, 10)
+        }
+        
+        if(parseInt(totalQuestion.value) > 0){
+            numero = parseInt(totalQuestion.value, 10) - 1
+            totalQuestion.value = numero
+        }
+        
+    })
+    btnMore.addEventListener('click', e =>{
+        e.preventDefault()
+        
+        if(parseInt(totalQuestion.value) < data.totalQuestion){
+            numero = parseInt(totalQuestion.value, 10) + 1
+            totalQuestion.value = numero
+        }
+        
+    })
     
     playGame.addEventListener('click', e => {
         e.preventDefault()
@@ -54,42 +95,9 @@ export function SeletcChoices(){
             console.log('Deves llenar todos los requerimientos para enpezar')
             return;
         }
-        console.log($main.getStorage('gameinfo'))
-        console.log(totalQuestion.value)
-    
-        // location.hash = '/select-choices'
-            
-    })
-
-    
-    let numero = null
-    numero = parseInt(totalQuestion.value, 10)
-
-    btnLess.addEventListener('click', e =>{
-        e.preventDefault()
-       
-        if (totalQuestion.value === '0'){
-            totalQuestion.value = '0'
-            numero = parseInt(totalQuestion.value, 10)
-        }
-
-        if(parseInt(totalQuestion.value) > 0){
-            numero = parseInt(totalQuestion.value, 10) - 1
-            totalQuestion.value = numero
-        }
         
-    })
-    
-    btnMore.addEventListener('click', e =>{
-        e.preventDefault()
-
-        if(parseInt(totalQuestion.value) < 10){
-            numero = parseInt(totalQuestion.value, 10) + 1
-            totalQuestion.value = numero
-        }
-        
+        location.hash = '/game'
     })
     
     
-
-}
+}    

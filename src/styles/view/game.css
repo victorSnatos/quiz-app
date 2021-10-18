@@ -1,0 +1,32 @@
+.nav-flex-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-question {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+
+.btn-answer {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: .7rem;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem
+}
+
+.btn-answer:hover{
+    background-color: var(--color-first);
+    color: var(--color-second);
+    
+    box-shadow: inset 2px 2px 3px var(--color-third),
+                inset -2px -2px 3px var(--color-third);
+}
+
+
