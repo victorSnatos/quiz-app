@@ -1,3 +1,4 @@
+import { Home , SeletcChoices} from "./script/main.js"
 
 (
     /**
@@ -8,6 +9,7 @@
     function(global, callback){
     if(!global.$main){
         global.$main = callback()
+        $main._Storage()
         global.addEventListener('hashchange', $main.load)
         global.addEventListener('load', $main.load)
     }
@@ -15,7 +17,10 @@
 })(window, function(){
     const Routes = {}
     const container = document.querySelector('#main')
+    const Storage = JSON.parse(localStorage.getItem('Storage'))
 
+    
+    
     const main = {}
     /**
      * 
@@ -29,6 +34,31 @@
         return this
     }
     
+    main._Storage = function(){
+        const local = JSON.parse(localStorage.getItem('Storage'))
+        if(!local){
+            localStorage.setItem('Storage', JSON.stringify({}))
+        }
+    }
+    
+    /**
+     * 
+     * @param {string} key 
+     * @param {object} data 
+     */
+    main.setStorage = function(key, data){
+        Storage[key] = data
+        localStorage.setItem('Storage', JSON.stringify(Storage))
+    }
+    
+    /**
+     * 
+     * @param {string} key 
+     * @returns {object}
+     */
+    main.getStorage = function(key){
+        return Storage[key]
+    }
     
     main.load = function(){
         const hash = location.hash.substring(1) || '/'
@@ -48,18 +78,12 @@
 })
 
 
-$main.routes('/','./views/home.html',null)
+$main.routes('/','./views/home.html', Home)
+     .routes('/select-choices','./views/choices.html', SeletcChoices)
      .routes('/game','./views/game.html', null)
     .load()
 
 
-function Main (){
-    const play = document.querySelector('#play')
-    play.addEventListener('submit', e =>{
-        e.preventDefault();
-        location.hash = '/game'
-    })
-}
 
 
 

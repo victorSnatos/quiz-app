@@ -1,40 +1,31 @@
 <div class="container">
 
-    <h1 class="title-main">Quiz</h1>
+    <h1 class="title-main mg-b1">Quiz</h1>
     <div class="player">
         <label for="" class="player-title">Player name</label>
-        <input type="text" class="player-input" autocomplete="off" placeholder="Name of player">
+        <input type="text" id="player-name" class="player-input" autocomplete="off" placeholder="Name of player">
     </div>
 
     <div>
         <h2 class="title-section">Choices</h2>
         <section class="choices-box">
-            <article class="choices-card choices-card-select">
+            <article class="choices-card" id="1" data-card="cardChoices">
                 <h3 class="choices-card-title">English</h3>
             </article>
 
-            <article class="choices-card">
+            <article class="choices-card" id="2" data-card="cardChoices">
                 <h3 class="choices-card-title">Programing</h3>
             </article>
 
-            <article class="choices-card">
+            <article class="choices-card" id="3" data-card="cardChoices">
                 <h3 class="choices-card-title">All choices</h3>
             </article>
         </section>
     </div>
 
-    <div>
-        <section class="questions-info">
-            <p class="title-info"><span id="choices">English</span> has <span id="question-total">34</span> questions available</p>
-          </section>
-
-        <section class="question-choices">
-            <button class="btn-choice btn-choice-less">-</button>
-            <input type="text" class="input-choices" value="0" autocomplete="off">
-            <button class="btn-choice btn-choice-more">+</button>
-        </section>
+    <br><br>
+    <div class="group-center">
+        <butto id="next" class="btn-game">Next</butto>
     </div>
-
-    <butto class="btn-game">New game</butto>
 
 </div>

@@ -1,3 +1,8 @@
+
+*{
+    box-sizing: border-box;
+}
+
 :root{
     --color-first: #01060c;
     --color-second: #eeeeee;
@@ -18,4 +23,136 @@ body {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.title-main {
+    text-align: center;
+    margin: 0;
+    font-size: 2.5rem;
+    line-height: 1.5;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+input:focus,
+button:focus{
+    outline: none;
+}
+
+.player {
+    margin-bottom: 1rem;
+}
+
+.player-title {
+    font-weight: 500;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-bottom: .5em;
+}
+
+.player-input {
+    font-size: 1rem;
+    width: 100%;
+    padding: .5rem;
+}
+
+
+.title-section {
+    text-align: center;
+}
+
+
+.choices-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+
+.choices-card {
+    background: var(--color-second);
+    color: var(--color-first);
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    box-shadow: 2px 2px 3px var(--color-third);
+    
+    cursor: pointer;
+}
+
+.choices-card-select {
+    background-color: var(--color-first);
+    color: var(--color-second);
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 3px var(--color-third),
+                inset -2px -2px 3px var(--color-third); 
+}
+
+.choices-card-title {
+    pointer-events: none;
+}
+
+.questions-info {
+    margin: 2rem;
+}
+
+.title-info {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+
+.question-choices {
+    text-align: center;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-choice,
+.input-choice{
+    padding: .5rem;
+    font-size: 1.1rem;
+}
+
+.input-choice{
+    width: 50px;
+    text-align: center;
+}
+
+
+.btn-choice {
+    font-weight: 700;
+    width: 60px;
+    cursor: pointer;
+}
+
+.group-center {
+    text-align: center;
+}
+
+.btn-game {
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    padding: .7em;
+    background-color: #01060c;
+    color: #eeeeee;  
+
+    padding-left: 3rem;
+    padding-right: 3rem;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 3px var(--color-third),
+                inset -2px -2px 3px var(--color-third);
+}
+
+
+.btn-game:hover{
+    background-color: var(--color-second);
+    color: var(--color-first);
 }
