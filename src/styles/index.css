@@ -7,7 +7,6 @@
 body {
     margin: 0;
     font-family:'Rubik', sans-serif;
-    /* min-height: 100vh; */
     background: var(--color-first);
     color: var(--color-second);
     overflow-x: hidden;
