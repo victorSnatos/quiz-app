@@ -1,29 +1,32 @@
 import { Question } from "./Questions.js"
 
+/**
+ * ------------------------------------------------------------------------
+ * Class Quiz
+ * ------------------------------------------------------------------------
+ */
 
-
-export class Quiz{
+export class Quiz {
     /**
      * 
      * @param {Question[]} questions 
      */
-    constructor (questions){
+    constructor(questions) {
         this.questions = questions
     }
-
 
     /**
      * 
      * @param {string} category 
      * @returns {Quiz[]}
      */
-    getCategory(category){
+    getCategory(category) {
         let quiz = []
-        this.questions.forEach(iten =>  {
-            if(iten.categoty === category){
+        this.questions.forEach(iten => {
+            if (iten.categoty === category) {
                 quiz.push(iten)
             }
-        } )
+        })
         return quiz
     }
 
@@ -33,22 +36,14 @@ export class Quiz{
      * @param {string} category 
      * @returns {number}
      */
-    lengthQuestions(category){
+    lengthQuestions(category) {
         let quiz = []
-        this.questions.forEach(iten =>  {
-            if(iten.categoty === category){
+        this.questions.forEach(iten => {
+            if (iten.categoty === category) {
                 quiz.push(iten)
             }
-        } )
+        })
         return quiz.length
     }
 
-} 
-
-
-
-
-
-
-
-
+}

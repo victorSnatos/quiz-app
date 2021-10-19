@@ -1,4 +1,4 @@
-import { Home , SeletcChoices} from "./script/main.js"
+import { Home , SeletcChoices, InitGame} from "./script/main.js"
 
 (
     /**
@@ -80,7 +80,8 @@ import { Home , SeletcChoices} from "./script/main.js"
 
 $main.routes('/','./views/home.html', Home)
      .routes('/select-choices','./views/choices.html', SeletcChoices)
-     .routes('/game','./views/game.html', null)
+     .routes('/game','./views/game.html', InitGame)
+     .routes('/endgame','./views/game-over.html', null)
     .load()
 
 

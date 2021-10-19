@@ -1,7 +1,19 @@
+
 import { Question } from "./model/Questions.js";
 import { questionsData } from "./data/data.js";
 import { Quiz } from "./model/Quiz.js";
+import { Game } from "./model/Game.js";
+import { UI } from "./model/UI.js";
 
+const questions = questionsData.map(question => new Question(question.question, question.choices, question.answer, question.categoty))
+const quiz = new Quiz(questions)
+
+
+  /**
+   * ------------------------------------------------------------------------
+   * Function Home Definition
+   * ------------------------------------------------------------------------
+   */
 export function Home() {
     const d = document
     const next = d.querySelector('#next')
@@ -29,9 +41,6 @@ export function Home() {
             console.log('Deves llenar todos los requerimientos para enpezar')
             return;
         }
-        const questions = questionsData.map(question => new Question(question.question, question.choices, question.answer, question.categoty))
-        const quiz = new Quiz(questions)
-        
         $main.setStorage('gameinfo', {
             player: playerName.value,
             choicesQuestion: cardSelect.textContent.toLowerCase(),
@@ -42,11 +51,15 @@ export function Home() {
         
     })
     
-
+    
 }
 
 
-
+  /**
+   * ------------------------------------------------------------------------
+   * Function SeletcChoices Definition
+   * ------------------------------------------------------------------------
+   */
 export function SeletcChoices(){
     const d = document
     const playGame = d.querySelector('#play-game')
@@ -96,8 +109,67 @@ export function SeletcChoices(){
             return;
         }
         
+        
+        $main.setStorage('gameinfo', {
+            player: data.player,
+            choicesQuestion: data.choicesQuestion,
+            totalQuestion: data.totalQuestion,
+            questionsToAnswer : parseInt(totalQuestion.value, 10)
+        }) 
         location.hash = '/game'
+        
     })
     
     
-}    
+}
+
+  /**
+   * ------------------------------------------------------------------------
+   * Function InitGame Definition
+   * ------------------------------------------------------------------------
+   */
+export function InitGame(){
+    const data = $main.getStorage('gameinfo')
+    
+    const questionsSelect = quiz.getCategory(data.choicesQuestion)
+    const game = new Game(questionsSelect, data.player, data.questionsToAnswer)
+    const ui = new UI
+
+    Render(ui,game)
+    
+    /**
+     * 
+     * @param {UI} ui 
+     * @param {Game} game 
+     */
+    function Render(ui, game){
+        const currentQuestion = game.getQuestinonNext()
+        
+        if(currentQuestion){
+            ui.showPlayer(game.player)
+            ui.showQuestion(currentQuestion.question)
+            ui.showQuestionTotal(game.toAnswer.length, game.nextQuestion + 1)
+            ui.showChoices(currentQuestion.choices, (choice)=> {
+                game.guess(choice)
+                Render(ui,game)
+            })
+        }else {
+            location.hash = '/endgame'
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
