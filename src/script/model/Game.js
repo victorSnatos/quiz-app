@@ -18,7 +18,6 @@ export class Game {
         this._questions = questions
         this.player = player
         this.toAnswer = this._questinonToAsnwer(toAnswer)
-
     }
     
     /**
@@ -35,18 +34,19 @@ export class Game {
      */
      _questinonToAsnwer(answer){
          const toAnswer = []
-
-        for(let i = 1 ; i <= answer; i++){
+        for(let i = 0 ; i <= answer -1; i++){
             toAnswer.push(this._questions[i])
         }
-
          return toAnswer
     }
 
-
+    /**
+     * 
+     * @param {string} answer 
+     */
     guess(answer){
         if(this._questions[this.nextQuestion].answer === answer){
-            this.score++
+            this.score++ 
         }        
         this.nextQuestion++
     }

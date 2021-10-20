@@ -32,8 +32,7 @@ export class UI {
         const titleQuestion = document.querySelector('#title-question')
         titleQuestion.textContent = question
     }
-    
-    
+       
     /**
      * 
      * @param {string[]} choices 
@@ -54,4 +53,19 @@ export class UI {
         container.appendChild(fragment)
 
     }
+
+    
+    /**
+     * 
+     * @param {number} score 
+     * @param {string} player 
+     */
+     showInfoEndGame(score, player){
+        const $score =  document.querySelector('#score')
+        const $player =  document.querySelector('#player')
+
+        $player.textContent = player
+        $score.textContent = score
+    }
+
 }

@@ -45,3 +45,106 @@ input:focus,
 button:focus{
     outline: none;
 }
+
+/* game over */
+
+.flex-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-cl-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+
+}
+
+/* logo  */
+
+.logo {
+    padding: 1rem;
+    margin: 2rem;
+    text-align: center;
+    
+}
+
+.logosvg {
+    font-size: 1rem;
+    width: 300px;
+}
+
+#logo {
+    padding: 2rem;
+    background-color: white;
+}
+
+#letter1 {
+    animation: moverLetter1 1s .1s ease  both;
+}
+
+#letter2 {
+    animation: moverLetter1 1s .13s ease  both;
+}
+
+#letter3 {
+    transform: translateY(0%);
+    animation: moverLetter1 1s .16s ease  both;
+}
+#letter4 {
+    animation: moverLetter1 1s .19s ease  both;
+}
+#letter5 {
+    animation: moverLetter1 1s .112s ease  both;
+}
+
+@keyframes moverLetter1 {
+    0% {
+        transform: translateY(100%);
+    }
+    
+    50% {
+        transform: translateY(-100%);
+    }
+    
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+
+#user {
+    animation: roteuser 1s .125s ease both;
+}
+
+@keyframes roteuser {
+    0% {
+        transform: translateX(-50%);
+    }
+    
+    100%{
+        transform: translateX(0%);
+    }
+}
+
+
+
+#Trazado_12,
+#Trazado_16 {
+    fill: #ff0000;
+    /* display: none; */
+}
+
+.player {
+    opacity: 0;
+    transform: scale(.9);
+    animation: player 1s .125s ease both;
+}
+@keyframes player {
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}

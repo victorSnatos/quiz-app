@@ -53,8 +53,6 @@ export function Home() {
     
     
 }
-
-
   /**
    * ------------------------------------------------------------------------
    * Function SeletcChoices Definition
@@ -104,7 +102,7 @@ export function SeletcChoices(){
     playGame.addEventListener('click', e => {
         e.preventDefault()
         
-        if (totalQuestion.value === '') {
+        if (totalQuestion.value === '' || totalQuestion.value === '0') {
             console.log('Deves llenar todos los requerimientos para enpezar')
             return;
         }
@@ -122,12 +120,11 @@ export function SeletcChoices(){
     
     
 }
-
-  /**
-   * ------------------------------------------------------------------------
-   * Function InitGame Definition
-   * ------------------------------------------------------------------------
-   */
+/**
+ * ------------------------------------------------------------------------
+ * Function InitGame Definition
+ * ------------------------------------------------------------------------
+ */
 export function InitGame(){
     const data = $main.getStorage('gameinfo')
     
@@ -154,17 +151,44 @@ export function InitGame(){
                 Render(ui,game)
             })
         }else {
+            $main.setStorage('scorePlayer', {
+                score : game.score,
+                player: game.player
+            })
             location.hash = '/endgame'
         }
-
+        
     }
-
+    
 }
+/**
+   * ------------------------------------------------------------------------
+   * Function EndGame Definition
+   * ------------------------------------------------------------------------
+ */
+export function EndGame() {
+    const d = document;
+    
+    const newGame = d.querySelector('#new-game');
+    const replayGame = d.querySelector('#replay-game');
+    const dataOfGame = $main.getStorage('scorePlayer')
 
+    const ui = new UI
 
+    ui.showInfoEndGame(dataOfGame.score, dataOfGame.player)
 
-
-
+    newGame.addEventListener('click', e => {
+        e.preventDefault();
+        $main.setStorage('gameinfo', {}) 
+        location.hash = '/';
+    })
+    
+    replayGame.addEventListener('click', e => {
+        e.preventDefault();
+        location.hash = '/game';
+    })
+    
+}
 
 
 

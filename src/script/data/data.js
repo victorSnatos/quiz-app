@@ -7,7 +7,7 @@ export const questionsData = [{
     {
         question: 'La frase "Good Day" en que contexto del dia se usa',
         choices: ['Durante todo en dia', 'Solo por la mañana'],
-        answer: 'Solo por la mañana',
+        answer: 'Durante todo en dia',
         categoty: 'english',
     },
     {
